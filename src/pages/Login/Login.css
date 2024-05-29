@@ -1,0 +1,19 @@
+.loginPage{
+    display: flex;
+    /* flex-direction: column; */
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 100vh;
+    gap:100px;
+    /* margin: 20px; */
+}
+
+
+@media screen and (max-width:776px) {
+    .loginPage{
+    gap:10px;
+    }
+
+ 
+}

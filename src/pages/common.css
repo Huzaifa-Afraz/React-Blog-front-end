@@ -1,0 +1,100 @@
+.auth .auth__form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* background-color: #fff; */
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .1), 0 8px 16px rgba(0, 0, 0, .1);
+    box-sizing: border-box;
+    /* margin: 40px 0 0; */
+    padding: 20px;
+    width: 396px;
+}
+
+.login__btn, .Signup__btn {
+    width: 360px;
+    background-color: #1877f2;
+    border: none;
+    border-radius: 6px;
+    font-size: 20px;
+    line-height: 48px;
+    padding: 0 16px;
+    color: White;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.text-only-btn {
+    border: none;
+    background-color: transparent;
+    color: #1877f2;
+    /* width: 100%; */
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+}
+
+.text-only-btn::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: 1px;
+    left: 0;
+    background-color: #1877f2;
+    transition: width 0.3s ease-in-out;
+}
+
+.text-only-btn:hover::after {
+    width: 100%;
+}
+
+.auth__form .auth__Inputs {
+    font-size: 17px;
+    padding: 14px 16px;
+    width: 100%;
+    /* width: 330px; */
+    border-radius: 6px;
+    border: 1px solid #dddfe2;
+}
+
+.auth__form .auth__Inputs :focus {
+    border-color: #1b74e4;
+    box-shadow: 0 0 0 2px #e7f3ff;
+    caret-color: #1b74e4;
+}
+
+hr {
+    align-items: center;
+    border-bottom: 1px solid #dadde1;
+    display: flex;
+    margin: 20px 0;
+    text-align: center;
+}
+
+
+.create__acc {
+    border: none;
+    border-radius: 6px;
+    font-size: 17px;
+    line-height: 48px;
+    padding: 0 16px;
+    background-color: #42b72a;
+    color: #fff;
+    width: 192px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.createACC:hover {
+    transition: 200ms cubic-bezier(.08, .52, .52, 1) background-color, 200ms cubic-bezier(.08, .52, .52, 1) box-shadow, 200ms cubic-bezier(.08, .52, .52, 1) transform;
+}
