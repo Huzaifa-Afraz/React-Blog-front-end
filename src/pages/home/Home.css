@@ -1,0 +1,36 @@
+.posts{
+    margin: 50px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+.posts .post{
+    display: flex;
+    gap: 70px;
+}
+.posts .post:nth-child(2n+1){
+    flex-direction: row-reverse;
+}
+.post .img{
+    flex: 2;
+}
+.post .img img{
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+}
+.post .content{
+    flex: 3;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+.post .content h2{
+    font-size: 42px;
+}
+.post .content p{
+    font-size: 18px;
+}
+.post .content a{
+    width: fit-content;
+}

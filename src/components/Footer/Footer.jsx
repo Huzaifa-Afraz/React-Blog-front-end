@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col, Stack, Image, Nav, NavLink} from "react-bootstrap";
+import { Container, Row, Col, Stack, Image, Nav} from "react-bootstrap";
 import { Link } from 'react-router-dom';
 export default function Footer() {
   return (
@@ -20,7 +20,7 @@ export default function Footer() {
           </Col>
           <Col >
              <Nav className='flex-column align-items-center'>
-              Useful Links
+              <h4 className='h5'>Useful links</h4>
               <Link className='nav-link' to="/">Home</Link>
                   <Link className='nav-link' to="/create">Write</Link>
                   <Link className='nav-link' to="/login">Login</Link>

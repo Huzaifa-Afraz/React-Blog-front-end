@@ -13,7 +13,7 @@ export default function NavBar() {
             <Link className='navbar-brand' to="/"><img className='logo' src="./img/logo.png" alt="logo" /></Link>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
             <Navbar.Offcanvas
-              id={`offcanvasNavbar-expand-$"md"`}
+              id={`offcanvasNavbar-expand-md`}
               aria-labelledby={`offcanvasNavbarLabel-expand-md`}
               placement="end"
             >
