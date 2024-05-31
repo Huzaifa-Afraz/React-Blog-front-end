@@ -7,5 +7,9 @@
   }
   a{
     text-decoration: none !important;
+    width: fit-content;
   
+  }
+  button{
+    width: fit-content;
   }
