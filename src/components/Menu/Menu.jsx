@@ -30,6 +30,7 @@ export default function Menu() {
       ];
   return (
     <div className='menu'>
+        <h2>Other psots you may like</h2>
       {posts.map(post=>{
         return(
         <div className="post d-flex gap-1 flex-column" key={post.id}>

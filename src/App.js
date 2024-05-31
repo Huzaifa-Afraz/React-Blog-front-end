@@ -4,7 +4,7 @@ import Home from "./pages/home/Home.jsx";
 import Login from "./pages/Login/Login.jsx";
 import DetailBlog from "./pages/Detail/DetailBlog.jsx";
 import CreateBlog from "./pages/CreateBlog/CreateBlog.jsx";
-import NavBar from "./components/Navbar/NavBar.jsx";
+import NavBar from "./components/Navbar/Navigationbar.jsx";
 import Footer from "./components/Footer/Footer.jsx";
 import Register from "./pages/register/Register.jsx";
 const Layout = () => {

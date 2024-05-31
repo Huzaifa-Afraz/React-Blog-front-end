@@ -45,7 +45,7 @@ export default function DetailBlog() {
             </p>
           </div>
         </div>
-        <div className="sidebar"><Menu/></div>
+        <div className="sidebar mb-4"><Menu/></div>
       </div>
     </Container>
   );
