@@ -10,7 +10,7 @@ export default function Navigationbar() {
     <>
         <Navbar key="md" expand="md" className="bg-body-tertiary mb-3">
           <Container >
-            <Link className='navbar-brand' to="/"><img className='logo' src="./img/logo.png" alt="logo" /></Link>
+            <Link className='navbar-brand' to="/"><img className='logo' src="/img/logo.png" alt="logo" /></Link>
             <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-md`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-md`}
@@ -19,13 +19,19 @@ export default function Navigationbar() {
             >
               <Offcanvas.Header closeButton>
                 <Offcanvas.Title id={`offcanvasNavbarLabel-expand-md`}>
-                  <img className='logo' src="./img/logo.png" alt="logo" />
+                  <img className='logo' src="/img/logo.png" alt="logo" />
                 </Offcanvas.Title>
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <Link className='nav-link' to="/">Home</Link>
-                  <Link className='nav-link' to="/create">Write</Link>
+                  <Link className='nav-link' to="/">General</Link>
+                  <Link className='nav-link' to="/art">Art</Link>
+                  <Link className='nav-link' to="/science">Science</Link>
+                  <Link className='nav-link' to="/technology">Technology</Link>
+                  <Link className='nav-link' to="/entertainment">Entertainment</Link>
+                  <Link className='nav-link' to="/design">Design</Link>
+                  <Link className='nav-link' to="/sports">Sports</Link>
+                  <Link className='nav-link' to="/food">Food</Link>
                   <Link className='nav-link' to="/login">Login</Link>
                   <Link className='nav-link' to="/register">Register</Link>
                 </Nav>

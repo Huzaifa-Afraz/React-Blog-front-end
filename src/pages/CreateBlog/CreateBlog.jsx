@@ -36,12 +36,51 @@ export default function CreateBlog() {
             </div>
 
           </div>
-           <div className="cat-labels">
+           <div className="cat-labels mt-3">
             <h2>Category</h2>
-            
-           </div>
+
+
+            <div className="cat">
+              <input type="radio" name="cat" value="Art" id="Art" />
+              <label htmlFor="Art">Art</label>
+            </div>
+
+
+            <div className="cat">
+              <input type="radio" name="cat" value="Science" id="Science" />
+              <label htmlFor="Science">Science</label>
+            </div>
+
+
+            <div className="cat">
+              <input type="radio" name="cat" value="technology" id="technology" />
+              <label htmlFor="technology">Technology</label>
+            </div>
+
+            <div className="cat">
+              <input type="radio" name="cat" value="Entertaiment" id="Entertaiment" />
+              <label htmlFor="Entertaiment">Entertaiment</label>
+            </div>
+
+            <div className="cat">
+              <input type="radio" name="cat" value="design" id="design" />
+              <label htmlFor="design">Design</label>
+            </div>
+
+
+            <div className="cat">
+              <input type="radio" name="cat" value="sports" id="sports" />
+              <label htmlFor="sports">Sports</label>
+            </div>
+
+            <div className="cat">
+              <input type="radio" name="cat" value="food" id="food" />
+              <label htmlFor="food">Food</label>
+            </div>
+
           
-          </aside>
+    </div>
+</aside>
           
           </Col>
         </Row>

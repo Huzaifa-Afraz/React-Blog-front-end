@@ -2,17 +2,19 @@
     padding: 10px;
 }
 .editorContainer{
-    height: 300px
+    /* height: 300px */
+    height: 445px;
     /* overflow: scroll; */
 /* border: 1px solid gray; */
     
 }
 .editorContainer .Editor{
     height: calc(30vh - 65px);
+    height: 100%;
     /* height: calc(100vh - 30vh); */
    border: none;
 }
-.blog-data{
+.blog-data,.cat-labels{
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -43,4 +45,8 @@
     color: #fff;
     border-radius: 5px;
 
+}
+.cat-labels .cat{
+    display: flex;
+    gap: 5px;
 }

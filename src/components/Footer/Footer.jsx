@@ -9,7 +9,7 @@ export default function Footer() {
           <Col className=''>
             <Stack>
               <Image 
-              src='./img/logo.png'
+              src='/img/logo.png'
               rounded
               width={150}
               height={150}
