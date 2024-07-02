@@ -3,9 +3,10 @@ import Input from "../../components/Input/Input.jsx";
 import Button from "../../components/Button/Button.jsx";
 import "../common.css";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 export default function Register() {
   const [inputs, setinput]=useState({
-username:'',
+name:'',
 email:'',
 password:'',
 confirm_password:''
@@ -28,19 +29,26 @@ seterror('');
 return true;
 }
 
-const handlesubmit=(e)=>{
+const handlesubmit=async (e)=>{
   e.preventDefault();
   if(validatepassword()){
-    console.log(inputs)
+    console.log(inputs);
+    try{
+
+      const res=await axios.put("http://localhost:8800/api/auth/register",inputs);
+      console.log(res)
+    }catch(err){
+      seterror(err)
+    }
   }
   
 }
-  return (
+  return ( 
     <div className="auth">
       <form className="auth__form" action="" onSubmit={handlesubmit}>
         <h1 className="mx-auto">Signup</h1>
         
-        <input name="username" type="text" placeholder="hohn deo" className="auth__Inputs" onChange={handlechage} required/>
+        <input name="name" type="text" placeholder="hohn deo" className="auth__Inputs" onChange={handlechage} required/>
         <input name="email" type="email" placeholder="example@gmail.com" className="auth__Inputs" onChange={handlechage} required/>
         <input name="password" type="password" placeholder="Password" className="auth__Inputs" onChange={handlechage} required/>
         <input name="confirm_password" type="password" placeholder="Confirm Password" className="auth__Inputs" onChange={handlechage} required/>
