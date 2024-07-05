@@ -4,6 +4,7 @@ import Button from "../../components/Button/Button.jsx";
 import "../common.css";
 import { Link } from "react-router-dom";
 import axios from 'axios';
+import { Alert } from 'react-bootstrap';
 export default function Register() {
   const [inputs, setinput]=useState({
 name:'',
@@ -13,6 +14,7 @@ confirm_password:''
 
   })
   const [errors, seterror]=useState('')
+  const [success, setSuccess] = useState('');
 
 
 const handlechage=(e)=>{
@@ -35,10 +37,19 @@ const handlesubmit=async (e)=>{
     console.log(inputs);
     try{
 
-      const res=await axios.put("http://localhost:8800/api/auth/register",inputs);
-      console.log(res)
+      const res=await axios.post("http://localhost:8800/api/auth/register",{
+        name:inputs.name,
+        email:inputs.email,
+        password:inputs.password
+      }
+    );
+    setSuccess('User registered successfully');
+    setTimeout(() => {
+      setSuccess('');
+    }, 5000);
+      
     }catch(err){
-      seterror(err)
+      seterror(err.response?.data || 'An error occurred');
     }
   }
   
@@ -54,7 +65,9 @@ const handlesubmit=async (e)=>{
         <input name="confirm_password" type="password" placeholder="Confirm Password" className="auth__Inputs" onChange={handlechage} required/>
 
         <Button btnClass="login__btn" name="register" />
-        <span className="text-center text-danger">{errors?errors:''}</span>
+       {/* { errors && <span className="text-center text-danger">{errors}</span>} */}
+       {errors && <Alert variant="danger">{errors}</Alert>}
+        {success && <Alert variant="success">{success}</Alert>}
         <hr />
 
         <span className="mx-auto">Alredy have an account? <Link className="text-only-btn" to="/login">Login</Link></span>
