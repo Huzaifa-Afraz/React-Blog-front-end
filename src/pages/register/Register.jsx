@@ -25,6 +25,9 @@ const handlechage=(e)=>{
 const validatepassword=()=>{
   if(inputs.password!==inputs.confirm_password){
     seterror('passwords do not match')
+    setTimeout(()=>{
+      seterror('')
+    },3000)
     return false;
 }
 seterror('');
@@ -34,7 +37,6 @@ return true;
 const handlesubmit=async (e)=>{
   e.preventDefault();
   if(validatepassword()){
-    console.log(inputs);
     try{
 
       const res=await axios.post("http://localhost:8800/api/auth/register",{
@@ -46,10 +48,13 @@ const handlesubmit=async (e)=>{
     setSuccess('User registered successfully');
     setTimeout(() => {
       setSuccess('');
-    }, 5000);
+    }, 3000);
       
     }catch(err){
       seterror(err.response?.data || 'An error occurred');
+      setTimeout(()=>{
+        seterror('');
+      },3000)
     }
   }
   
