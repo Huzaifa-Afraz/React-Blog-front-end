@@ -55,7 +55,7 @@ export default function Home() {
               )
             })}
           </div>
-            <div className="right">hel</div>
+            {/* <div className="right">hel</div> */}
         </Container>
         
       
