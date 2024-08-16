@@ -2,12 +2,11 @@ import React, { useContext, useState } from "react";
 import Button from "../../components/Button/Button.jsx";
 import "../common.css";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../context/authContext.js";
 export default function Login() {
-  const { auth, login } = useContext(AuthContext);
+  const {login } = useContext(AuthContext);
   const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",

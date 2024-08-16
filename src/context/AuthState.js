@@ -3,22 +3,27 @@ import AuthContext from "./authContext";
 import axios from "axios";
 
 const AuthState=({children})=>{
-    const [auth,setAuth]=useState(JSON.parse(localStorage.getItem("user") || null));
+    const [logoutalert, setLogout]=useState('');
+    const [user,setUser]=useState(JSON.parse(localStorage.getItem("user") || null));
     const login=async (data)=>{
         const response=await axios.post("http://localhost:8800/api/auth/login",data)
-        setAuth(response.data);
+        setUser(response.data);
     }
     const logout=async()=>{
         const response=await axios.post("http://localhost:8800/api/auth/logout")
-        setAuth(null);
+setLogout(response.data)
+        setUser(null);
+        setTimeout(()=>{
+            setLogout('')
+        },3000)
     }
     useEffect(
         () => {
-            localStorage.setItem("user", JSON.stringify(auth))
+            localStorage.setItem("user", JSON.stringify(user))
         }
-    ,[auth]);
+    ,[user]);
 
-    return <AuthContext.Provider value={{login, logout, auth}}>{children}</AuthContext.Provider>
+    return <AuthContext.Provider value={{login, logout, user, logoutalert}}>{children}</AuthContext.Provider>
 
 }
 export default AuthState;
