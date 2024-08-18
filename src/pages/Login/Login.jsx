@@ -4,7 +4,7 @@ import "../common.css";
 import { Link } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import AuthContext from "../../context/authContext.js";
+import AuthContext from "../../context/AuthContext.js";
 export default function Login() {
   const {login } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      login(data);
+      await login(data);
 
       setSuccess("log in successfully");
       setTimeout(() => {

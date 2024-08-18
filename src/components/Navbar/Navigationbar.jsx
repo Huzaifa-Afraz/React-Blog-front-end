@@ -6,7 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import AuthContext from "../../context/authContext";
+import AuthContext from "../../context/AuthContext";
 import { Alert } from "react-bootstrap";
 export default function Navigationbar() {
   const { user, logout, logoutalert } = useContext(AuthContext);

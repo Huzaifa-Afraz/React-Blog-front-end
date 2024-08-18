@@ -37,7 +37,7 @@ export default function Menu() {
             <img src={post.img} alt="" />
             <Link><h2>{post.title}</h2></Link>
             {/* <p>{post.desc}</p> */}
-            <Link className='btn btn-outline-primary' to={`post/${post.id}`}>Read more</Link>
+            <Link className='btn btn-outline-primary' to={`/post/${post.id}`}>Read more</Link>
         </div>
       )})}
     </div>
