@@ -5,7 +5,7 @@ import "./detailBlog.css";
 import Menu from "../../components/Menu/Menu";
 import axios from "axios";
 import moment from "moment"
-import AuthContext  from '../../context/AuthContext.js';
+import AuthContext  from '../../context/AuthContext';
 import { Alert } from "react-bootstrap";
 // import Edit from './img/edit.svg'
 // import {Delete} from './img/trash-can.svg'
