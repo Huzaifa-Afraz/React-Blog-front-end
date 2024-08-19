@@ -1,5 +1,5 @@
-import { Children, useEffect, useState } from "react";
-import AuthContext from "./AuthContext.js";
+import {useEffect, useState } from "react";
+import AuthContext  from './AuthContext.js';
 import axios from "axios";
 
 const AuthState=({children})=>{
