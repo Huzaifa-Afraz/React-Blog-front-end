@@ -34,7 +34,7 @@ useEffect(()=>{
   fetchData();
 },[id])
 const handledelete=()=>{
-  const 
+  // const 
 }
 // console.log({post}+"new here")
   return (
