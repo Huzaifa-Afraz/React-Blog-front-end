@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Container } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import "./detailBlog.css";
@@ -7,10 +7,12 @@ import axios from "axios";
 import moment from "moment"
 import AuthContext  from '../../context/AuthContext';
 import { Alert } from "react-bootstrap";
+import AlertModal from "../../components/Modal/Modal";
 // import Edit from './img/edit.svg'
 // import {Delete} from './img/trash-can.svg'
 
 export default function DetailBlog() {
+  const Ref=useRef(null)
   const [err,setErr]=useState("")
   const {user}=useContext(AuthContext)
   // console.log("user is "+ user.name)
@@ -33,12 +35,25 @@ useEffect(()=>{
     }
   fetchData();
 },[id])
-const handledelete=()=>{
+const CheckAccess=(result)=>{
+  return result;
+}
+const handledelete=async()=>{
+  Ref.current.click();
+  try {
+    if(CheckAccess){
+      await axios.delete(`http://localhost:8800/api/posts/${id}`)
+    }
+  } catch (error) {
+    setErr(error.response.data)
+    
+  }
   // const 
 }
 // console.log({post}+"new here")
   return (
     <Container>
+     {Ref && <AlertModal title="huzaifa blog says" body="Are you sure you want to proceed?" Ref={Ref} click={CheckAccess}></AlertModal>}
       <div className="ReadPost">
         <div className="main">
           {err && <Alert variant="danger">{err}</Alert>}
@@ -52,7 +67,7 @@ const handledelete=()=>{
              {post.userimg &&  <img
                 className="userimg"
                 src={post?.userimg}
-                alt=""
+                alt={user?.name}
               />}
               <div className="info">
                 <span>{post.name}</span>
@@ -61,9 +76,9 @@ const handledelete=()=>{
             </div>
             {user?.name === post.name && <div className="icon-can align-items-center d-flex gap-4">
               <Link to="/write?edit=1">
-                <img className="icon" src="../img/edit.svg" alt="" />
+                <img className="icon" src="/img/edit.svg" alt="" />
               </Link>
-              <img onClick={handledelete} className="icon" src="../img/trash-can.svg" alt=" delete buton" />
+              <img onClick={handledelete} className="icon" src="/img/trash-can.svg" alt=" delete buton" />
               </div>}
             </div>
           <div className="content my-4">
