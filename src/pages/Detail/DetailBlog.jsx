@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { Container } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation} from "react-router-dom";
 import "./detailBlog.css";
 import Menu from "../../components/Menu/Menu";
 import axios from "axios";
@@ -14,6 +14,7 @@ import AlertModal from "../../components/Modal/Modal";
 export default function DetailBlog() {
   const Ref=useRef(null)
   const [err,setErr]=useState("")
+  const [success, setSuccess]=useState('');
   const {user}=useContext(AuthContext)
   // console.log("user is "+ user.name)
   const [post, setPost]=useState({})
@@ -29,20 +30,33 @@ useEffect(()=>{
 // setErr(response.data)
     } catch (error) {
       setErr(error.response.data)
-      console.log(error)
+      // console.log(error)
       // console.log(error.response.data)
     }
     }
   fetchData();
 },[id])
-const CheckAccess=(result)=>{
-  return result;
+
+const CheckAccess=()=>{
+  const result=Ref.current;
+  console.log(result)
+  // return result;
 }
+
+
+
 const handledelete=async()=>{
   Ref.current.click();
   try {
     if(CheckAccess){
-      await axios.delete(`http://localhost:8800/api/posts/${id}`)
+      // const response= axios.delete(`http://localhost:8800/api/posts/${id}`)
+      setSuccess(CheckAccess)
+      console.log(CheckAccess(Ref.current))
+      
+// setTimeout(()=>{
+//   setSuccess("")
+//   navigate("/")
+// },2000)
     }
   } catch (error) {
     setErr(error.response.data)
@@ -50,6 +64,7 @@ const handledelete=async()=>{
   }
   // const 
 }
+// console.log(post)
 // console.log({post}+"new here")
   return (
     <Container>
@@ -57,6 +72,8 @@ const handledelete=async()=>{
       <div className="ReadPost">
         <div className="main">
           {err && <Alert variant="danger">{err}</Alert>}
+          {success && <Alert variant="success">{success}</Alert>}
+          {/* <Alert variant="success">hello world</Alert> */}
           <img
             className="main-img"
             src={post?.img}
@@ -86,7 +103,9 @@ const handledelete=async()=>{
            {post.desc}
           </div>
         </div>
-        <div className="sidebar mb-4"><Menu/></div>
+        <div className="sidebar mb-4">
+          <Menu cat={post.cat} postid={post.postid}/>
+          </div>
       </div>
     </Container>
   );
