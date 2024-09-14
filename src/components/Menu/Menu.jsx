@@ -31,7 +31,7 @@ export default function Menu({cat,postid}) {
     //   ];
     const [posts, setPost]=useState([])
     const [err, setErr]=useState('')
-
+console.log(err)
     useEffect(()=>{
       const fetchData=async()=>{
         try {
@@ -52,8 +52,8 @@ export default function Menu({cat,postid}) {
 
     return (
     <div className='menu'>
-        <h2>Other psots you may like</h2>
-      {posts.map(post=>{
+        <h2>Similar posts</h2>
+      {posts.slice(0,4).map(post=>{
         return postid !== post.id ?(
         <div className="post d-flex gap-1 flex-column" key={post.id}>
             <img src={post.img} alt="" />
