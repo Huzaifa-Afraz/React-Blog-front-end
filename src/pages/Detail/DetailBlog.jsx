@@ -8,14 +8,17 @@ import moment from "moment"
 import AuthContext  from '../../context/AuthContext';
 import { Alert } from "react-bootstrap";
 import AlertModal from "../../components/Modal/Modal";
+import { useNavigate } from "react-router-dom";
 // import Edit from './img/edit.svg'
 // import {Delete} from './img/trash-can.svg'
 
 export default function DetailBlog() {
+
   const Ref=useRef(null)
   const [err,setErr]=useState("")
   const [success, setSuccess]=useState('');
   const {user}=useContext(AuthContext)
+  const navigate=useNavigate();
   // console.log("user is "+ user.name)
   const [post, setPost]=useState({})
 const id=useLocation().pathname.split("/")[2];
@@ -39,8 +42,8 @@ useEffect(()=>{
 
 const CheckAccess=()=>{
   const result=Ref.current;
-  console.log(result)
-  // return result;
+  // console.log(result)
+  return result;
 }
 
 
@@ -49,14 +52,14 @@ const handledelete=async()=>{
   Ref.current.click();
   try {
     if(CheckAccess){
-      // const response= axios.delete(`http://localhost:8800/api/posts/${id}`)
+      const response= axios.delete(`http://localhost:8800/api/posts/${id}`)
       setSuccess(CheckAccess)
       console.log(CheckAccess(Ref.current))
       
-// setTimeout(()=>{
-//   setSuccess("")
-//   navigate("/")
-// },2000)
+setTimeout(()=>{
+  setSuccess("")
+  navigate("/")
+},2000)
     }
   } catch (error) {
     setErr(error.response.data)
@@ -92,7 +95,7 @@ const handledelete=async()=>{
               </div>
             </div>
             {user?.name === post.name && <div className="icon-can align-items-center d-flex gap-4">
-              <Link to="/write?edit=1">
+              <Link to={`/create?edit=${post.postid}`} state={post}>
                 <img className="icon" src="/img/edit.svg" alt="" />
               </Link>
               <img onClick={handledelete} className="icon" src="/img/trash-can.svg" alt=" delete buton" />

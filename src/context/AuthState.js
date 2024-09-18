@@ -8,6 +8,7 @@ const AuthState=({children})=>{
     const login=async (data)=>{
         const response=await axios.post("http://localhost:8800/api/auth/login",data)
         setUser(response.data);
+        // console.log(response)
     }
     const logout=async()=>{
         const response=await axios.post("http://localhost:8800/api/auth/logout")
@@ -20,6 +21,7 @@ setLogout(response.data)
     useEffect(
         () => {
             localStorage.setItem("user", JSON.stringify(user))
+            
         }
     ,[user]);
 

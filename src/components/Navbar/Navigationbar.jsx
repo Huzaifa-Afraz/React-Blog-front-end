@@ -10,7 +10,7 @@ import AuthContext from "../../context/AuthContext";
 import { Alert } from "react-bootstrap";
 export default function Navigationbar() {
   const { user, logout, logoutalert } = useContext(AuthContext);
-  console.log(logout);
+  // console.log(logout);
   return (
     <>
       <Navbar key="md" expand="md" className="bg-body-tertiary mb-3">
