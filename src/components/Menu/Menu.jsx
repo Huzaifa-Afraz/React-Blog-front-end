@@ -56,7 +56,7 @@ console.log(err)
       {posts.slice(0,4).map(post=>{
         return postid !== post.id ?(
         <div className="post d-flex gap-1 flex-column" key={post.id}>
-            <img src={post.img} alt="" />
+            <img src={`/upload/${post.img}`} alt="" />
             <Link><h2>{post.title}</h2></Link>
             {/* <p>{post.desc}</p> */}
             <Link className='btn btn-outline-primary' to={`/post/${post.id}`}>Read more</Link>

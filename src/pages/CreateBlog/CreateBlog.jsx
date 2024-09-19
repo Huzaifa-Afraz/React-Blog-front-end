@@ -34,8 +34,9 @@ console.log(file?file:'file not found')
     e.preventDefault();
     const imgUrl = await upload();
     try {
-      state ? axios.put(`http://localhost:8800/api/posts/${state.postid}`, { title, desc, cat, img: file ? imgUrl : '', date:moment(Date.now().format("YY-MM-DD HH:mm:ss"))}) : axios.post(`http://localhost:8800/api/posts/`, { title, desc, cat, img: file ? imgUrl : '',date:moment(Date.now().format("YY-MM-DD HH:mm:ss")) })
-      // console.log(res)
+      console.log(state)
+      const res=state ? axios.put(`http://localhost:8800/api/posts/${state.postid}`, { title, desc, cat, img: file ? imgUrl : '', date:moment(Date.now()).format("YY-MM-DD HH:mm:ss")}, {withCredentials:true}) : axios.post(`http://localhost:8800/api/posts/`, { title, desc, cat, img: file ? imgUrl : '',date:moment(Date.now()).format("YY-MM-DD HH:mm:ss") }, {withCredentials:true})
+      console.log({res})
       navigate('/')
     } catch (error) {
 

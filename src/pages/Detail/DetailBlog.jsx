@@ -79,7 +79,7 @@ setTimeout(()=>{
           {/* <Alert variant="success">hello world</Alert> */}
           <img
             className="main-img"
-            src={post?.img}
+            src={`/upload/${post?.img}`}
             alt={post.title}
           />
           <div className="user">
