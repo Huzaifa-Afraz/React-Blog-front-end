@@ -5,10 +5,11 @@ import 'react-quill/dist/quill.snow.css';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './CreateBlog.css'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import moment from 'moment';
 export default function CreateBlog() {
+  const navigate=useNavigate();
   const state = useLocation().state;
   // const [value, setValue] = useState('');
   // const [data, setdata]=useState({titlle:'',desc:'',cat:'',file:null})
@@ -16,7 +17,7 @@ export default function CreateBlog() {
   const [desc, setDesc] = useState(state?.desc || '')
   const [file, setFile] = useState(state?.img || null)
   const [cat, setCat] = useState(state?.cat || '')
-
+console.log(file?file:'file not found')
   const upload = async () => {
     try {
       const formData = new FormData();
@@ -31,9 +32,11 @@ export default function CreateBlog() {
   // console.log(state)
   const handleClick = async e => {
     e.preventDefault();
-    const imgUrl = upload();
+    const imgUrl = await upload();
     try {
       state ? axios.put(`http://localhost:8800/api/posts/${state.postid}`, { title, desc, cat, img: file ? imgUrl : '', date:moment(Date.now().format("YY-MM-DD HH:mm:ss"))}) : axios.post(`http://localhost:8800/api/posts/`, { title, desc, cat, img: file ? imgUrl : '',date:moment(Date.now().format("YY-MM-DD HH:mm:ss")) })
+      // console.log(res)
+      navigate('/')
     } catch (error) {
 
     }

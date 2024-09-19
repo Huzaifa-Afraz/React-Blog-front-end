@@ -54,7 +54,7 @@ const handledelete=async()=>{
     if(CheckAccess){
       const response= axios.delete(`http://localhost:8800/api/posts/${id}`)
       setSuccess(CheckAccess)
-      console.log(CheckAccess(Ref.current))
+      // console.log(CheckAccess(Ref.current))
       
 setTimeout(()=>{
   setSuccess("")
