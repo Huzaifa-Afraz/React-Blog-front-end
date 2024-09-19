@@ -6,7 +6,7 @@ const AuthState=({children})=>{
     const [logoutalert, setLogout]=useState('');
     const [user,setUser]=useState(JSON.parse(localStorage.getItem("user") || null));
     const login=async (data)=>{
-        const response=await axios.post("http://localhost:8800/api/auth/login",data)
+        const response=await axios.post("http://localhost:8800/api/auth/login",data,{withCredentials:true})
         setUser(response.data);
         // console.log(response)
     }
