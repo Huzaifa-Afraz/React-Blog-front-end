@@ -54,16 +54,18 @@ export default function CreateBlog() {
       // }
       const res=state?await axios.put(`http://localhost:8800/api/posts/${state.postid}`, requestBody, { withCredentials: true }):await axios.post(`http://localhost:8800/api/posts/`, requestBody, { withCredentials: true });
       if(res.status===200){
-      setSuccess(res.data);}
+      setSuccess(res?.data || "created succesfully ");}
       else{
-        setErr(res.data);
+        setErr(res?.data || "error occured");
       }
       setTimeout(()=>{
+        setSuccess('');
+        setErr('');
 
         navigate('/');
       },3000)
     } catch (error) {
-      console.log(error);
+      setErr(error.message)
     }
   };
 
