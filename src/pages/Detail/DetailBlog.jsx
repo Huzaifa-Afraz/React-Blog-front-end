@@ -52,7 +52,8 @@ const handledelete=async()=>{
   Ref.current.click();
   try {
     if(CheckAccess){
-      const response= axios.delete(`http://localhost:8800/api/posts/${id}`)
+      // const response= axios.delete(`http://localhost:8800/api/posts/${id}`)
+     axios.delete(`http://localhost:8800/api/posts/${id}`)
       setSuccess(CheckAccess)
       // console.log(CheckAccess(Ref.current))
       
@@ -69,6 +70,10 @@ setTimeout(()=>{
 }
 // console.log(post)
 // console.log({post}+"new here")
+const getText=(html)=>{
+  const doc=new DOMParser().parseFromString(html, 'text/html');
+  return doc.body.textContent;
+}
   return (
     <Container>
      {Ref && <AlertModal title="huzaifa blog says" body="Are you sure you want to proceed?" Ref={Ref} click={CheckAccess}></AlertModal>}
@@ -103,7 +108,7 @@ setTimeout(()=>{
             </div>
           <div className="content my-4">
             <h1>{post.title}</h1>
-           {post.desc}
+           {getText(post.desc)}
           </div>
         </div>
         <div className="sidebar mb-4">
