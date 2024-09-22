@@ -12,17 +12,18 @@ import moment from 'moment';
 export default function CreateBlog() {
   const navigate = useNavigate();
   const state = useLocation().state;
-  const [err,setErr]=useState("")
-  const [success, setSuccess]=useState('');
-
+  const [err, setErr] = useState("");
+  const [success, setSuccess] = useState('');
+  
   // Initialize form states
   const [title, setTitle] = useState(state?.title || '');
   const [desc, setDesc] = useState(state?.desc || '');
-  const [file, setFile] = useState(null); // Will be updated if user uploads a new image
+  const [file, setFile] = useState(null); 
   const [cat, setCat] = useState(state?.cat || '');
-
+  
+  // Function to handle file upload
   const upload = async () => {
-    if (!file) return state?.img; // If no new image is uploaded, use the existing image
+    if (!file) return state?.img; // Return existing image if no new file
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -30,12 +31,24 @@ export default function CreateBlog() {
       return res.data;
     } catch (error) {
       console.log(error);
+      return null; // Ensure null is returned if upload fails
     }
   };
-
-  const handleClick = async e => {
+  
+  // Function to handle form submission
+  const handleClick = async (e) => {
     e.preventDefault();
-    const imgUrl = await upload(); // If no new image, the existing image URL will be used
+    
+    const imgUrl = await upload(); // Handle file upload first
+  
+    if (!imgUrl) {
+      setErr("Please select an image");
+      setTimeout(() => {
+        setErr("");
+      }, 2000);
+      return; // Stop further execution if no image URL
+    }
+  
     try {
       const requestBody = { 
         title, 
@@ -44,30 +57,31 @@ export default function CreateBlog() {
         img: imgUrl, 
         date: moment(Date.now()).format("YY-MM-DD HH:mm:ss") 
       };
+  
+      const res = state
+        ? await axios.put(`http://localhost:8800/api/posts/${state.postid}`, requestBody, { withCredentials: true })
+        : await axios.post(`http://localhost:8800/api/posts/`, requestBody, { withCredentials: true });
       
-      // if (state) {
-      //   // Update existing post
-      //   const res=await axios.put(`http://localhost:8800/api/posts/${state.postid}`, requestBody, { withCredentials: true });
-      // } else {
-      //   // Create new post
-      //   const res=await axios.post(`http://localhost:8800/api/posts/`, requestBody, { withCredentials: true });
-      // }
-      const res=state?await axios.put(`http://localhost:8800/api/posts/${state.postid}`, requestBody, { withCredentials: true }):await axios.post(`http://localhost:8800/api/posts/`, requestBody, { withCredentials: true });
-      if(res.status===200){
-      setSuccess(res?.data || "created succesfully ");}
-      else{
-        setErr(res?.data || "error occured");
+      if (res.status === 200) {
+        setSuccess(res?.data || "Successfully Created");
+        setTimeout(() => {
+          navigate('/'); // Navigate after success
+        }, 2000);
+      } else {
+        setErr(res?.data || "Error occurred");
+        setTimeout(() => {
+          setErr(''); // Clear error message after 3 seconds
+        }, 3000);
       }
-      setTimeout(()=>{
-        setSuccess('');
-        setErr('');
-
-        navigate('/');
-      },3000)
     } catch (error) {
-      setErr(error.message)
+      // Proper error handling
+      setErr(error.response?.status === 400 ? "Please fill all fields" : error.response?.data || "An error occurred");
+      setTimeout(() => {
+        setErr('');
+      }, 3000);
     }
   };
+  
 
   return (
     <div className='my-4'>

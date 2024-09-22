@@ -51,10 +51,12 @@ const CheckAccess=()=>{
 const handledelete=async()=>{
   Ref.current.click();
   try {
-    if(CheckAccess){
-      // const response= axios.delete(`http://localhost:8800/api/posts/${id}`)
-     axios.delete(`http://localhost:8800/api/posts/${id}`)
-      setSuccess(CheckAccess)
+  // console.log('trying to delete post')
+    if(CheckAccess()){
+      console.log('automaticly executed' + CheckAccess)
+      const response=await axios.delete(`http://localhost:8800/api/posts/${id}`,{ withCredentials: true })
+    //  await axios.delete(`http://localhost:8800/api/posts/${id}`,{ withCredentials: true })
+      // setSuccess(response.data)
       // console.log(CheckAccess(Ref.current))
       
 setTimeout(()=>{
@@ -63,7 +65,7 @@ setTimeout(()=>{
 },2000)
     }
   } catch (error) {
-    setErr(error.response.data)
+    setErr(error.response.data + "heloow")
     
   }
   // const 
