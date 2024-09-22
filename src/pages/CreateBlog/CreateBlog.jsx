@@ -30,7 +30,7 @@ export default function CreateBlog() {
       const res = await axios.post('http://localhost:8800/api/uploads', formData);
       return res.data;
     } catch (error) {
-      console.log(error);
+      setErr(error.data)
       return null; // Ensure null is returned if upload fails
     }
   };
@@ -57,11 +57,9 @@ export default function CreateBlog() {
         img: imgUrl, 
         date: moment(Date.now()).format("YY-MM-DD HH:mm:ss") 
       };
-  
-      const res = state
-        ? await axios.put(`http://localhost:8800/api/posts/${state.postid}`, requestBody, { withCredentials: true })
-        : await axios.post(`http://localhost:8800/api/posts/`, requestBody, { withCredentials: true });
-      
+  let res;
+      state? (res = await axios.put(`http://localhost:8800/api/posts/${state.postid}`, requestBody, { withCredentials: true }))
+        : (res=await axios.post(`http://localhost:8800/api/posts/`, requestBody, { withCredentials: true }))
       if (res.status === 200) {
         setSuccess(res?.data || "Successfully Created");
         setTimeout(() => {
@@ -97,14 +95,16 @@ export default function CreateBlog() {
               placeholder='Enter title' 
               onChange={e => setTitle(e.target.value)} 
               className='w-100 mb-3 Title-input' 
+              required
             />
             <div className="editorContainer">
-              <ReactQuill className='Editor' theme="snow" value={desc} onChange={setDesc} />
+              <ReactQuill className='Editor' theme="snow" value={desc} onChange={setDesc} required/>
             </div>
           </Col>
 
           <Col sm={3}>
             <aside>
+              <form>
               <div className="blog-data">
                 <span><b>Status: </b>Draft</span>
                 <span><b>Visibility: </b>Public</span>
@@ -113,6 +113,7 @@ export default function CreateBlog() {
                   style={{ display: "none" }} 
                   onChange={e => setFile(e.target.files[0])} 
                   id="upload-img" 
+                  required
                 />
                 <label htmlFor="upload-img" className='upload-img'>Upload an image</label>
                 <div className="buttons">
@@ -120,7 +121,7 @@ export default function CreateBlog() {
                   <button className='update-btn' onClick={handleClick}>{state ? 'Update' : 'Create'}</button>
                 </div>
               </div>
-              
+              </form>
               <div className="cat-labels mt-3">
                 <h2>Category</h2>
 

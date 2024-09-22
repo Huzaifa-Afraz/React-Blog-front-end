@@ -9,8 +9,6 @@ import AuthContext  from '../../context/AuthContext';
 import { Alert } from "react-bootstrap";
 import AlertModal from "../../components/Modal/Modal";
 import { useNavigate } from "react-router-dom";
-// import Edit from './img/edit.svg'
-// import {Delete} from './img/trash-can.svg'
 
 export default function DetailBlog() {
 
@@ -19,59 +17,40 @@ export default function DetailBlog() {
   const [success, setSuccess]=useState('');
   const {user}=useContext(AuthContext)
   const navigate=useNavigate();
-  // console.log("user is "+ user.name)
   const [post, setPost]=useState({})
 const id=useLocation().pathname.split("/")[2];
-// console.log(id)
 useEffect(()=>{
   const fetchData=async()=>{
     try {
       
       const response=await axios.get(`http://localhost:8800/api/posts/${id}`)
-      // console.log(`respnse is ${response.data}`)
       setPost(response.data)
-// setErr(response.data)
     } catch (error) {
       setErr(error.response.data)
-      // console.log(error)
-      // console.log(error.response.data)
+
     }
     }
   fetchData();
 },[id])
 
-const CheckAccess=()=>{
-  const result=Ref.current;
-  // console.log(result)
-  return result;
-}
-
-
-
-const handledelete=async()=>{
-  Ref.current.click();
+const handledelete = async () => {
   try {
-  // console.log('trying to delete post')
-    if(CheckAccess()){
-      console.log('automaticly executed' + CheckAccess)
-      const response=await axios.delete(`http://localhost:8800/api/posts/${id}`,{ withCredentials: true })
-    //  await axios.delete(`http://localhost:8800/api/posts/${id}`,{ withCredentials: true })
-      // setSuccess(response.data)
-      // console.log(CheckAccess(Ref.current))
-      
-setTimeout(()=>{
-  setSuccess("")
-  navigate("/")
-},2000)
-    }
+    const response = await axios.delete(`http://localhost:8800/api/posts/${id}`, { withCredentials: true });
+    setSuccess(response.data);
+    setTimeout(() => {
+      setSuccess("");
+      navigate("/");
+    }, 2000);
   } catch (error) {
-    setErr(error.response.data + "heloow")
-    
+    setErr(error.response.data);
   }
-  // const 
-}
-// console.log(post)
-// console.log({post}+"new here")
+};
+
+const CheckAccess = (confirmed) => {
+  if (confirmed) {
+    handledelete(); // Proceed to delete post
+  }
+};
 const getText=(html)=>{
   const doc=new DOMParser().parseFromString(html, 'text/html');
   return doc.body.textContent;
@@ -105,7 +84,8 @@ const getText=(html)=>{
               <Link to={`/create?edit=${post.postid}`} state={post}>
                 <img className="icon" src="/img/edit.svg" alt="" />
               </Link>
-              <img onClick={handledelete} className="icon" src="/img/trash-can.svg" alt=" delete buton" />
+              {/* <img onClick={CheckAccess} className="icon" src="/img/trash-can.svg" alt=" delete buton" /> */}
+              <img onClick={() => Ref.current.click()}  className="icon" src="/img/trash-can.svg" alt=" delete buton" />
               </div>}
             </div>
           <div className="content my-4">
