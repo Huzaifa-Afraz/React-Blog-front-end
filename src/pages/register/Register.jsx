@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Input from "../../components/Input/Input.jsx";
 import Button from "../../components/Button/Button.jsx";
 import "../common.css";
 import { Link } from "react-router-dom";
@@ -45,7 +44,7 @@ const handlesubmit=async (e)=>{
         password:inputs.password
       }
     );
-    setSuccess('User registered successfully');
+    setSuccess(res.data || 'User registered successfully');
     setTimeout(() => {
       setSuccess('');
     }, 3000);
